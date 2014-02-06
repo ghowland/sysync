@@ -6,3 +6,5 @@ This tool has 1.5+ years of managing a medium sized production system, but the d
 
 So consider this not-yet-ready for your environment yet.  Also, no docs yet.  I have to write those up too.
 
+Also, I need to finish creating an exmaple conf system that demonstrates all the features without being too specific about the environment it was managing previously.
+
