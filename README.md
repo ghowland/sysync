@@ -33,6 +33,6 @@ Command Line options:
 
 To run from a deployment directory:
 
-> ../../sysync/sysync.py install
+```../../sysync/sysync.py install```
 
 
