@@ -1,9 +1,11 @@
-#!/usr/bin/python2.4
+#!/usr/bin/env python
 
 """
 sysync
 
 System Synchronizer - Global system configuration enforcement
+
+Requries Python 2.4 to 2.x
 """
 
 
