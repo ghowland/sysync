@@ -31,8 +31,8 @@ Command Line options:
 ```
 
 
-To run from a deployment directory:
+To run from a config directory:
 
-```../../sysync/sysync.py install```
+```[config/production]$ ../../sysync/sysync.py install```
 
 
