@@ -118,7 +118,7 @@ When sysync is dont with processing both of the packages, it will only remove th
 
 Why?  Because we first told it to create it with the file given, and then we told it to remove the file.  The final configuration section for the files "/etc/resolv.conf" ignores putting a file there if it's going to be removed.
 
-The Final Configuration data will look like this:
+The Final Configuration Specification data will look like this:
 
 ```
 - files:
