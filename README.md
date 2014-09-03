@@ -244,6 +244,16 @@ ordered: false
 if not match: null
 ```
 
+##### "source path" and "symlink path"
+
+"source path" and "symlink path" parameters are mutually exclusive, you will either use the "source path" to set a file to copy, or you will use a "symlink path" to create a symlink at "path" to "source path"
+
+##### Templating
+
+If the "template" parameter is true, then the file from "source path" is considered a template file, following Python dictionary formatting "%(key)s".
+
+*Only Python string formatting is current supported: "%()s".  Other formats for floating point values, etc will be forthcoming.*
+
 #### yum
 
 The Handler Key for "yum" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
