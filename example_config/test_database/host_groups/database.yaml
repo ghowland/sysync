@@ -1,5 +1,7 @@
 name: Databases
 
+domain: somewhere.com
+
 hosts:
   - db-1
 

@@ -55,6 +55,37 @@ Packages will be applied in sequence to each host.
 
 sysync is run locally, so the host name should already be configured before sysync is run.  sysync is not a system image manager, so it expects that a system already has a bootable OS, and an IP address, and a working resolver, and a unique host name.  Once a host has these things, sysync will take care of the rest.
 
+Example Host Group:
+
+```
+name: Databases
+
+domain: prod.somewhere.com
+
+hosts:
+  - db-1
+
+data:
+  - host_type: db
+  - cache_server: ["memcache-1", "memcache-2", "memcache-3"]
+
+packages:
+  - common
+  - users
+  - groups
+  - mysql
+```
+
+This is a "Database" host group, for machines of the domain "prod.somewhere.com".  If you have different domain names, make different Host Groups, as every host can only have a single Fully Qualified Domain Name, and sysync uses this as a key to determine what systems to configure.  This can be changed for testing purposes, of course.
+
+There is 1 host in this Host Group: "db-1.prod.somewhere.com".
+
+There is 2 pieces of templating data for this Host Group.  The first is "host-type: db", so if a "files" Handler item has "template: true" in it's configuration, then it will replace "%(host_type)s" with "db" throughout that file.
+
+The second template data is "cache-server", and it is equal to a list.  This means that the values in the list will be selected by means of the number of items (3), and the position of the host in the host list (0).  The algorithm would then be:  0 % 3.  Zero modulus three equals zero (0), so the first item in the list is choosen: "memcache-1"
+
+Finally, there is a list of "packages".  These will be applied in sequence, creating a Final Configuration Specification (see below), which can be applied to manage this host's configuration in an idempotent and deterministic manner.
+
 ### Packages
 
 Packages are lists of Configuration Handler Dictionary/Hash/Map/Associative-Array data.
