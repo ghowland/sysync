@@ -163,6 +163,16 @@ The above Package file would first install "bind", then installed "files/etc/res
 
 This allows for absolute sequencing of how things will be installed in this package.
 
+#### Note on Ordering of Packages in a Host Group
+
+The order of Packages in a Host Group is very important, because this determined when a Handler item is first encountered, and when it is updated.
+
+It is recommended that you start with more general configuration (ex: a "common" package), and then become more specific over time (ex: an "app" server package, or "mysql" package).
+
+If you require updating a single file twice, for example starting with a common "/etc/resolv.conf" and then later updating to a specific "/etc/resolv.conf", to perhaps switch between general datacenter DNS resolution and specific app-server DNS resolution, you can create a general Package "common" and a final run Package such as "common_last_app" that is the last Package listed.
+
+In this way you can perform general actions at the beginning of the configuration, and then override them with a very specific change later.  See the section below [#strict-ordering][Strict Ordering] for details.
+
 ### The Final Configuration Specification
 
 A host can only be in a single host-group.  A host-group contains a set list of packages, in sequence.  Each package contains a sequence of configuration handlers, and handler items to be applied to the Final Configuration Specification.
