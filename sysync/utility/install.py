@@ -34,7 +34,7 @@ def InstallSystem(options, args):
       # Specify our host group, manually
       host_group = options['build_as']
     else:
-      Error('Host "%s" is not in any host group' % hostname, options)
+      Error('Host "%s" is not in any host group.  Use --buildas=[hostgroup] to test a configuration.' % hostname, options)
   
   else:
     # If we are not trying to manually set the Host Group

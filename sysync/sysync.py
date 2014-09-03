@@ -76,10 +76,10 @@ def Usage(error=None):
     exit_code = 0
   
   print
-  print 'usage: %s [options] <command>' % os.path.basename(sys.argv[0])
+  print 'usage: %s [options] [command]' % os.path.basename(sys.argv[0])
   print
   print 'Commands:'
-  print '  install                 Install the sysync deployment on this local host'
+  print '  install                 Install the sysync deployment on this local host (default)'
   #print '  package                 Package the sysync configuration for deployment'
   print
   print 'Options:'
@@ -214,11 +214,17 @@ def Main(args=None):
   
   
   # Ensure we at least have a command, it's required
-  if len(args) < 1:
-    Usage('No command sepcified')
+  if len(args) >= 1:
+    # Get the command
+    command = args[0]
   
-  # Get the command
-  command = args[0]
+  # Default to the "install" command, which is typically what we want
+  else:
+    command = 'install'
+    
+    if command_options['verbose']:
+      print 'Command not specified, defaulting command to "install"'
+  
   
   # If this is an unknown command, say so
   if command not in COMMANDS:
@@ -249,6 +255,13 @@ if __name__ == '__main__':
   #NOTE(g): Fixing the path here.  If you're calling this as a module, you have to 
   #   fix the utility/handlers module import problem yourself.
   sys.path.append(os.path.dirname(sys.argv[0]))
+
+  # Determine the default handler default path from the script argument, to
+  #   allow running from a downloaded location and not /etc/sysync
+  default_handler_default_path = '%s/handlers/defaults/' % os.path.dirname(os.path.realpath(sys.argv[0]))
+  if default_handler_default_path != DEFAULT_HANDLER_DEFAULT_PATH:
+    DEFAULT_HANDLER_DEFAULT_PATH = default_handler_default_path
+  
   
   Main(sys.argv[1:])
 

@@ -36,7 +36,7 @@ Command Line options:
 
 To run from the git clone directory, as the "database" Host Group, specifying all paths on the command line:
 
-```[sysync]$ ./sysync/sysync.py --buildas=database --hostgroups=example_config/test_database/host_groups/ --packages=example_config/test_database/packages/ --files=example_config/test_database/files/ --handlers=sysync/handlers/defaults/ install```
+```[sysync]$ ./sysync/sysync.py --hostgroups=example_config/test_database/host_groups/ --packages=example_config/test_database/packages/ --files=example_config/test_database/files/ --buildas=database```
 
 This will output:
 
