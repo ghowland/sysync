@@ -36,7 +36,85 @@ To run from a config directory:
 ```[config/production]$ ../../sysync/sysync.py install```
 
 
-### Handlers
+### Configuration Handlers
 
-#### Files
+sysync configurations are defined in Handler Sections of data.  Each configuration file is considered a Dictionary/Hash/Map/Associative-Array, and the top-level key is the Configuration Handler.
+
+Currently these are the Configuration Handlers: files, groups, services, users, yum
+
+Configuration Handlers can be added easily to the code, and a downloadable plug-in system will be developed in the future to support more architectures and package managers.
+
+#### files
+
+Default values:
+
+```
+path: null
+source path: null
+symlink path: null
+remove: false
+template: false
+
+user: root
+group: root
+mode: 644
+directory mode: 755
+
+ignore directories: ['.svn']
+ignore files: []
+
+set base directory permissions: false
+
+# If true, this file will not collapse into the normal order of import, so that they can happen at a later time than first encountered
+ordered: false
+
+# If this file is not a match for a given path.  This is the only exclusionary directive and is the compliment to "ordered", in that something done initially should not be re-done when the alter ordered function is run
+if not match: null
+```
+
+#### groups
+
+Default values:
+
+```
+name: null
+gid: null
+remove: false
+```
+
+#### services
+
+Default values:
+
+```
+name: null
+levels: 2345
+run: true
+remove: false
+```
+
+#### users
+
+Default values:
+
+```
+name: null
+fullname: null
+uid: null
+groups: []
+ssh key: null
+shell: null
+home: null
+remove: false
+```
+
+#### yum
+
+Default values:
+
+```
+name: null
+version: null
+remove: false
+```
 
