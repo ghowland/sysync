@@ -301,6 +301,8 @@ run: true
 remove: false
 ```
 
+For use with chkconfig systems, such as RHEL, CentOS and Fedora.
+
 #### users
 
 The Handler Key for "users" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
@@ -318,6 +320,10 @@ home: null
 remove: false
 ```
 
+If no "uid" is specified, the useradd tool will choose the next available one, on each host.  It is recommended to set these yourself, but not required.
+
+"shell" and "home" will also be defaulted by useradd.
+
 #### groups
 
 The Handler Key for "groups" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
@@ -330,4 +336,5 @@ gid: null
 remove: false
 ```
 
+If no "gid" is specified, the groupadd tool will choose the next available one, on each host.  It is recommended to set these yourself, but not required.
 
