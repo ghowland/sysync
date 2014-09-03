@@ -1,3 +1,9 @@
 - yum:
   - name: mysql-server
 
+- services:
+  - name: mysqld
+    run: true
+
+
+  
