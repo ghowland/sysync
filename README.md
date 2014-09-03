@@ -244,11 +244,11 @@ ordered: false
 if not match: null
 ```
 
-##### "source path" and "symlink path"
+###### "source path" and "symlink path"
 
 "source path" and "symlink path" parameters are mutually exclusive, you will either use the "source path" to set a file to copy, or you will use a "symlink path" to create a symlink at "path" to "source path"
 
-##### Templating
+###### Templating
 
 If the "template" parameter is true, then the file from "source path" is considered a template file, following Python dictionary formatting "%(key)s".
 
