@@ -33,6 +33,7 @@ OUTPUT_FORMATS = ['pprint', 'json', 'yaml']
 DEFAULT_HOST_GROUP_PATH = '/etc/sysync/host_groups/'
 DEFAULT_PACKAGE_PATH = '/etc/sysync/packages/'
 DEFAULT_HANDLER_DEFAULT_PATH = '/etc/sysync/handlers/defaults/'
+DEFAULT_FILES_PATH = '/etc/sysync/files/'
 DEFAULT_DEPLOY_PATH = '/etc/sysync/deploy/'
 DEFAULT_DEPLOY_TEMP_PATH = '/tmp/sysync_tmp/'
 
@@ -89,6 +90,7 @@ def Usage(error=None):
   print
   print '      --hostgroups[=path] Path to host groups (directory)'
   print '      --packages[=path]   Path to package files (directory)'
+  print '      --files[=path]      Path to installation files (directory)'
   print
   print '      --buildas[=group]   Manually specify Host Group, cannot be in one already'
   print
@@ -109,7 +111,7 @@ def Main(args=None):
   
   long_options = ['help', 'output=', 'format=', 'verbose', 'hostgroups=', 
       'deploy=', 'packages=', 'bootstrap', 'commit', 'handlers=',
-      'buildas=']
+      'buildas=', 'files=']
   
   try:
     (options, args) = getopt.getopt(args, '?hvo:f:bC', long_options)
@@ -121,9 +123,10 @@ def Main(args=None):
   command_options['commit'] = False
   command_options['bootstrap'] = False
   command_options['hostgroup_path'] = DEFAULT_HOST_GROUP_PATH
+  command_options['package_path'] = DEFAULT_PACKAGE_PATH
+  command_options['files_path'] = DEFAULT_FILES_PATH
   command_options['deploy_path'] = DEFAULT_DEPLOY_PATH
   command_options['deploy_temp_path'] = DEFAULT_DEPLOY_TEMP_PATH
-  command_options['package_path'] = DEFAULT_PACKAGE_PATH
   command_options['handler_data_path'] = DEFAULT_HANDLER_DEFAULT_PATH
   command_options['verbose'] = False
   command_options['build_as'] = None
@@ -178,6 +181,13 @@ def Main(args=None):
         command_options['handler_data_path'] = value
       else:
         Error('Handler path specified is not a directory: %s' % value)
+    
+    # Files Path
+    elif option in ('--files'):
+      if os.path.isdir(value):
+        command_options['files_path'] = value
+      else:
+        Error('Files path specified is not a directory: %s' % value)
     
     # Build As (Host Group)
     elif option in ('--buildas'):

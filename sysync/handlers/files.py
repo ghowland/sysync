@@ -97,6 +97,9 @@ def _CollectDestFilesFromSourcePath(section_item, options):
   # Result, all the files in the Source Path
   result_files = []
   
+  # Modify the source_path with the option
+  section_item['source path'] = '%s/%s' % (options['files_path'], section_item['source path'])
+  
   # Walk through the files
   for (dir_path, directories, files) in os.walk(section_item['source path']):
     # Store the remains of this path, that gets added to section_item['path']
