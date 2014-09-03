@@ -60,7 +60,7 @@ echo ssh-dss AAAAB3NzaC1kc3MAAACBAPTG0VLaD5Wstpl4EZ8NN0R2vmeMpGkJy0Epc7X2n9NZMLb
 validated: {'host_group': 'database'}
 ```
 
-This shows every command, that was not run because -C/--commit was not specified, to configure the current running system as the "database" machine.
+This shows every command, which were not run because -C/--commit was not specified, to configure the current running system as the "database" machine.
 
 Note that the "--buildas" command will only work if the current host is not specified in any Host Groups.  This is for testing only.  If the current host is specified in a Host Group, "--buildas=hostgroup" will exit with an error.
 
