@@ -233,7 +233,7 @@ mode: 644
 directory mode: 755
 
 ignore directories: ['.svn', '.git']
-ignore files: []
+ignore files: ['.gitignore']
 
 set base directory permissions: false
 
