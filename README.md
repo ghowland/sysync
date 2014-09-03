@@ -165,15 +165,15 @@ ordered: false
 if not match: null
 ```
 
-#### groups
+#### yum
 
-The Handler Key for "groups" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
+The Handler Key for "yum" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
 
 Default values:
 
 ```
 name: null
-gid: null
+version: null
 remove: false
 ```
 
@@ -207,15 +207,16 @@ home: null
 remove: false
 ```
 
-#### yum
+#### groups
 
-The Handler Key for "yum" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
+The Handler Key for "groups" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
 
 Default values:
 
 ```
 name: null
-version: null
+gid: null
 remove: false
 ```
+
 

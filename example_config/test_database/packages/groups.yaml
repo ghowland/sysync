@@ -1,0 +1,6 @@
+- groups:
+  - name: ops
+    gid: 2001
+
+  - name: eng
+    gid: 2002
