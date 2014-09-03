@@ -118,7 +118,7 @@ There is 2 pieces of templating data for this Host Group.  The first is "host-ty
 
 The second template data is "backup_server", and it is equal to a list.  This means that the values in the list will be selected by means of the number of items (3), and the position of the host in the host list (0).  The algorithm would then be:  0 % 3.  Zero modulus three equals zero (0), so the first item in the list is choosen: "backup-1" templates "%(backup_server)s" in files that have "template: true".
 
-Finally, there is a list of "packages".  These will be applied in sequence, creating a Final Configuration Specification (see below), which can be applied to manage this host's configuration in an idempotent and deterministic manner.
+Finally, there is a list of "packages".  These will be applied in sequence, creating a [Final Configuration Specification](#the-final-configuration-specification), which can be applied to manage this host's configuration in an idempotent and deterministic manner.
 
 ### Packages
 
