@@ -11,7 +11,7 @@ data:
 
 packages:
   - common
-  - users
   - groups
+  - users
   - mysql
 
