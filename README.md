@@ -36,6 +36,58 @@ To run from a config directory:
 ```[config/production]$ ../../sysync/sysync.py install```
 
 
+### Host Groups
+
+A host can only be in a single host grop
+
+
+### Hosts
+
+
+### Packages
+
+Packages are lists of Configuration Handler Dictionary/Hash/Map/Associative-Array data.
+
+A basic package that installs MySQL server would look like this:
+
+```
+- yum:
+  - name: mysql-server
+```
+
+In this way there is a "List -> Dictionary -> List -> Dictionary" approach to layering data.
+
+The first list is the sequence out from the package.  This package has 1 Configuration Handler section to process.  The Dictionary key is "yum" which specifies the Configuration Handler to be used.
+
+The list inside the yum configuration data is the order of the command groups to be run.  One or many items may be put under the "yum" handler, such as:
+
+```
+- yum:
+  - name: mysql-server
+  - name: mysql-devel
+```
+
+This would install the "mysql-sever" and the "mysql-devel" yum packages.
+
+Any number of sections can exist in the same Package file, and a "yum" handler could be created many times, like:
+
+```
+- yum:
+  - name: bind
+
+- files:
+  - path: /etc/resolv.conf
+    source path: files/etc/resolv.conf
+
+- yum:
+  - name: mysql-server
+```
+
+The above Package file would first install bind, then installed "files/etc/resolve.conf" in the "config/production" current working directory to /etc/resolv.conf, and finally it will install the "mysql-server" yum package.
+
+This allows for absolute sequencing of how things will be installed in this package.
+
+
 ### Configuration Handlers
 
 sysync configurations are defined in Handler Sections of data.  Each configuration file is considered a Dictionary/Hash/Map/Associative-Array, and the top-level key is the Configuration Handler.
