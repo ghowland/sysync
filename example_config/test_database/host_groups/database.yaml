@@ -6,7 +6,8 @@ hosts:
   - db-1
 
 data:
-  - type: db
+  - host_type: db
+  - cache_server: ["memcache-1", "memcache-2", "memcache-3"]
 
 packages:
   - common

@@ -21,12 +21,12 @@ Command Line options:
   -b, --bootstrap         Boot Strap this host (assume no local configuration)
   
       --hostgroups[=path] Path to host groups (directory)
-      --handlers[=path]   Path to handler default yaml data (directory)
       --packages[=path]   Path to package files (directory)
       
       --buildas[=group]   Manually specify Host Group, cannot be in one already
       
       --deploy[=path]     Path to deployment files (directory)
+      --handlers[=path]   Path to handler default yaml data (directory)
 
   -v, --verbose           Verbose output
   -o, --output            Output file
@@ -34,9 +34,9 @@ Command Line options:
 ```
 
 
-To run from a config directory:
+To run from the git clone directory:
 
-```[config/production]$ ../../sysync/sysync.py install```
+```[sysync]$ ./sysync/sysync.py -v --hostgroups=example_config/test_database/host_groups/ --packages=example_config/test_database/packages/ install```
 
 
 ### Host Groups

@@ -31,10 +31,10 @@ OUTPUT_FORMATS = ['pprint', 'json', 'yaml']
 
 # Default Configuration Paths
 DEFAULT_HOST_GROUP_PATH = '/etc/sysync/host_groups/'
-DEFAULT_DEPLOY_PATH = '/etc/sysync/deploy/'
-DEFAULT_DEPLOY_TEMP_PATH = '/tmp/sysync_tmp/'
 DEFAULT_PACKAGE_PATH = '/etc/sysync/packages/'
 DEFAULT_HANDLER_DEFAULT_PATH = '/etc/sysync/handlers/defaults/'
+DEFAULT_DEPLOY_PATH = '/etc/sysync/deploy/'
+DEFAULT_DEPLOY_TEMP_PATH = '/tmp/sysync_tmp/'
 
 
 def ProcessCommand(command, options, args):
@@ -88,12 +88,12 @@ def Usage(error=None):
   print '  -b, --bootstrap         Boot Strap this host (assume no local configuration)'
   print
   print '      --hostgroups[=path] Path to host groups (directory)'
-  print '      --handlers[=path]   Path to handler default yaml data (directory)'
   print '      --packages[=path]   Path to package files (directory)'
   print
   print '      --buildas[=group]   Manually specify Host Group, cannot be in one already'
   print
   print '      --deploy[=path]     Path to deployment files (directory)'
+  print '      --handlers[=path]   Path to handler default yaml data (directory)'
   print
   print '  -v, --verbose           Verbose output'
   print '  -o, --output            Output file'
