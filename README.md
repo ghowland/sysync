@@ -127,6 +127,8 @@ The Final Configuration Specification data will look like this:
     remove: true
 ```
 
+This will remove the file.  "source path" is ignored, because removal takes precidence.
+
 ### Configuration Handlers
 
 sysync configurations are defined in Handler Sections of data.  Each configuration file is considered a Dictionary/Hash/Map/Associative-Array, and the top-level key is the Configuration Handler.
