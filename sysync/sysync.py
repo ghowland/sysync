@@ -24,7 +24,7 @@ import handlers
 import utility.log
 
 # Possible commands that can be processed
-COMMANDS = ['install', 'package']
+COMMANDS = ['install', 'inspect']
 
 # Output format types
 OUTPUT_FORMATS = ['pprint', 'json', 'yaml']
@@ -52,6 +52,17 @@ def ProcessCommand(command, options, args):
   if command == 'install':
     result = utility.install.InstallSystem(options, args)
   
+  # Inspect the configuration, print out the Final Configuration Specification
+  elif command == 'inspect':
+    if len(args) != 1:
+      Usage('With the "inspect" command there should be one argument, the Host Group name.  Example: "%s inspect app_memcache"' % os.path.basename(sys.argv[0]))
+    
+    host_group = args[0]
+    
+    print 'Inspect Final Configuration Specification for Host Group: "%s"\n' % host_group
+    
+    result = utility.inspect.InspectHostGroup(host_group, options, args[1:])
+  
   # # Package for remote hosts
   # elif command == 'package':
   #   #result = utility.package.Package(options, args)
@@ -70,16 +81,17 @@ def Usage(error=None):
   If errors, exit code = 1, otherwise 0.
   """
   if error:
-    print '\nerror: %s' % error
+    print '\nERROR: %s' % error
     exit_code = 1
   else:
     exit_code = 0
   
   print
-  print 'usage: %s [options] [command]' % os.path.basename(sys.argv[0])
+  print 'usage: %s [options] [command] [command_args...]' % os.path.basename(sys.argv[0])
   print
   print 'Commands:'
-  print '  install                 Install the sysync deployment on this local host (default)'
+  print '  install                 Install the sysync deployment on this host (Default)'
+  print '  inspect <group>         Print the Host Group\'s Configuration Specification'
   #print '  package                 Package the sysync configuration for deployment'
   print
   print 'Options:'

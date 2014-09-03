@@ -216,6 +216,75 @@ The Final Configuration Specification data will look like this:
 
 This will remove the file.  "source path" is ignored, because removal takes precidence.
 
+##### Inspecting a Host Group's Final Configuration Specification
+
+In order to inspect a Host Group's Final Configuration Specification, use the "inspect" command.  By default the command used with sysync is "install".  You can type it after the command line options, or it is assumed by default.
+
+To run the inspect command from this Github clone, run:
+
+```[sysync]$ ./sysync/sysync.py --hostgroups=example_config/test_database/host_groups/ --packages=example_config/test_database/packages/ --files=example_config/test_database/files/ inspect database```
+
+This will inspect the "database" Host Group, and will print:
+
+```
+{'__key': '/etc/resolv.conf',
+ 'directory mode': 755,
+ 'group': 'root',
+ 'if not match': None,
+ 'ignore directories': ['.svn', '.git'],
+ 'ignore files': ['.gitignore'],
+ 'mode': 644,
+ 'ordered': False,
+ 'path': '/etc/resolv.conf',
+ 'remove': False,
+ 'set base directory permissions': False,
+ 'source path': 'example_config/test_database/files//common/etc/resolv.conf',
+ 'symlink path': None,
+ 'template': False,
+ 'user': 'root'}
+
+{'__key': 'ops', 'gid': 2001, 'name': 'ops', 'remove': False}
+
+{'__key': 'eng', 'gid': 2002, 'name': 'eng', 'remove': False}
+
+{'__key': 'geoff',
+ 'fullname': 'Geoff Howland',
+ 'groups': ['ops', 'eng'],
+ 'home': '/home/ghowland',
+ 'name': 'geoff',
+ 'remove': False,
+ 'shell': '/bin/bash',
+ 'ssh key': 'ssh-dss AAAAB3NzaC1kc3MAAACBAOVUyfBV3ovrFQz6rVFt582Zp+HzvzZvd1fWRXWIb2OLYWBndWFg4XbwzF1Xf/X0WDtSgM/kRuO0c/GRaOAn5qwGwMdiRVCBnjW/UcywQ8xfk0pfI5LyNsaCJadq1M6xbGPNlV73tV7y3nIUAmEngceXufnBIP2n086ZvOjgQKR/AAAAFQDvuj7w1QksR9BK8L5K72ZTuUIo+wAAAIArchj87mcd3P8NrGFlPBz24OHIuXaEjiI/V37NeWTEM1+eWDOFF5xwFQ+ohekEraOBm+S0GmKGSLSNpDvdyQx8fZFLAU5KutEHRfi6qcRBfGI8fep6BaZajKp3YjfuiQSxNuHVQr9J5/j/91capZO+vh8HaaiW8moiovWVe2EbCQAAAIEAkg0glZS0mBRbRRZRuIdFD9CPS4cZ5dMta8jk38BUQmNmHcJXmlhOWwp8t8T8IPMqG4uNcx8Byh3zOl2sqya1KhZ3x2bZ/ypxVyM9TBDTuvSUDqTEEzGFaVVFFelplDT8KbBs2cenVe6DwloAnEgkFrqBido2fwigOJ23Sl6GlTI= ghowland@somewhere',
+ 'uid': 2001}
+
+{'__key': 'wash',
+ 'fullname': 'George Washington',
+ 'groups': ['eng'],
+ 'home': None,
+ 'name': 'wash',
+ 'remove': False,
+ 'shell': None,
+ 'ssh key': 'ssh-dss AAAAB3NzaC1kc3MAAACBAPTG0VLaD5Wstpl4EZ8NN0R2vmeMpGkJy0Epc7X2n9NZMLbMscy3lcuYqdwJ8ch8Nf/fk2Zm+v9hyHBL/XxqquTCGPJqLhi1Pf3+N0zzHwMAaiLa89o1dsJG6mjEfym4Y6dECgifqVMSJSYfagi2HfgFB75GYYjR4uKSHMqEMH2LAAAAFQCix7HT0Fb/qvgC8B3axxiTYxUk5wAAAIApXOsD3g9L4gYVFafHZrH9JaoH+9ATtXSXxPTPEcISF2eCwSbZL57+GLrT6SpPes8TmwEKD/tsucZl7m6vwG5V86ILUzQwsjh0BP8CCwhkqBNZhLfNtjJn0/bfYESUejDgoBSK2k/EEzDIqOfILEp2wLqrHPBq93dC4vP0OXn9kAAAAIBpooBr/Q4Je2D8EqYsD/hlNzqNawhjNTNTS2+AWLftseN+nszugGZ0utRA8cDEGMR/1n2p8MjAu/KThXpJzWfe8g54NYasYc3GxdoNqrI4trYglSQTP4aKEBL0GYmb71NSiUPf0J6ahRswpo1yQx8XHt+aaWItRupgyFnYN1aUVg== wash@somewhere',
+ 'uid': 2002}
+
+{'__key': 'mysql-server',
+ 'name': 'mysql-server',
+ 'remove': False,
+ 'version': None}
+
+{'__key': 'mysqld',
+ 'levels': 2345,
+ 'name': 'mysqld',
+ 'remove': False,
+ 'run': True}
+```
+
+This shows all the Handler items in the sequence they will be processed during the configuration "install" with -C/--commit options.
+
+This is all the parameters available, found in the "./sysync/handlers/defaults/" directory, for the given Configuration Handler, with any updated values found in the packages.
+
+Note the "__key" parameter, which will map to "path" in a files Configuration, or "name" in a yum Configuration.  This is the unique identifier that allows sysync to act idempotently after processing all section items from all packages.  "__key" will only be seen more than once using the files "ordered" parameter, otherwise there will only be 1 instance of a given Configuration Handler "__key" in the inspect output.
+
 ### Configuration Handlers
 
 sysync configurations are defined in Handler Sections of data.  Each configuration file is considered a Dictionary/Hash/Map/Associative-Array, and the top-level key is the Configuration Handler.

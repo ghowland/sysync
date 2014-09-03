@@ -18,11 +18,18 @@ def FormatAndOuput(data, options):
     output = json.dumps(data)
   elif options.get('format', None) == 'yaml':
     output = yaml.safe_dump(data)
-  else:
+  elif type(data) == dict:
     # Wrap the top level of dicts on a key per block basis, then pretty print to clean it up
     output = ''
     for key in data:
       output += '%s: %s\n\n' % (key, pprint.pformat(data[key]).replace("\\'", "'"))
+  elif type(data) == list:
+    # Wrap the top level of dicts on a key per block basis, then pretty print to clean it up
+    output = ''
+    for item in data:
+      output += '%s\n\n' % pprint.pformat(item)
+  else:
+    output = pprint.pformat(data)
   
   # If we are outputting to a file...
   if 'output' in options:
