@@ -56,6 +56,11 @@ echo ssh-dss AAAAB3NzaC1kc3MAAACBAPTG0VLaD5Wstpl4EZ8NN0R2vmeMpGkJy0Epc7X2n9NZMLb
 /bin/chmod 600 ~wash/.ssh/authorized_keys
 /usr/sbin/groupadd -g 2001 ops
 /usr/sbin/groupadd -g 2002 eng
+/usr/bin/yum -y mysql-server
+/sbin/chkconfig --level 2 mysqld on
+/sbin/chkconfig --level 3 mysqld on
+/sbin/chkconfig --level 4 mysqld on
+/sbin/chkconfig --level 5 mysqld on
 ----NOT COMMITTED COMMAND LIST----
 validated: {'host_group': 'database'}
 ```
