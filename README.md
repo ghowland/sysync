@@ -45,10 +45,14 @@ This will output:
 /bin/cp example_config/test_database/files/common/etc/resolv.conf /etc/resolv.conf
 /usr/sbin/groupadd -g 2001 ops
 /usr/sbin/groupadd -g 2002 eng
-/usr/sbin/usermod -G "eng" ghowland
-echo ssh-dss AAAAB3NzaC1kc3MAAACBAOVUyfBV3ovrFQz6rVFt582Zp+HzvzZvd1fWRXWIb2OLYWBndWFg4XbwzF1Xf/X0WDtSgM/kRuO0c/GRaOAn5qwGwMdiRVCBnjW/UcywQ8xfk0pfI5LyNsaCJadq1M6xbGPNlV73tV7y3nIUAmEngceXufnBIP2n086ZvOjgQKR/AAAAFQDvuj7w1QksR9BK8L5K72ZTuUIo+wAAAIArchj87mcd3P8NrGFlPBz24OHIuXaEjiI/V37NeWTEM1+eWDOFF5xwFQ+ohekEraOBm+S0GmKGSLSNpDvdyQx8fZFLAU5KutEHRfi6qcRBfGI8fep6BaZajKp3YjfuiQSxNuHVQr9J5/j/91capZO+vh8HaaiW8moiovWVe2EbCQAAAIEAkg0glZS0mBRbRRZRuIdFD9CPS4cZ5dMta8jk38BUQmNmHcJXmlhOWwp8t8T8IPMqG4uNcx8Byh3zOl2sqya1KhZ3x2bZ/ypxVyM9TBDTuvSUDqTEEzGFaVVFFelplDT8KbBs2cenVe6DwloAnEgkFrqBido2fwigOJ23Sl6GlTI= ghowland@somewhere > /home/ghowland/.ssh/authorized_keys
-/bin/chown ghowland:ops /home/ghowland/.ssh/authorized_keys
-/bin/chmod 600 /home/ghowland/.ssh/authorized_keys
+/usr/sbin/useradd --create-home -c 'Geoff Howland' -g 'ops' -u 2001 -s /bin/bash -d "/home/ghowland" geoff
+/usr/sbin/usermod -G "eng" geoff
+/bin/mkdir ~geoff/.ssh
+/bin/chown geoff:ops ~geoff/.ssh
+/bin/chmod 700 ~geoff/.ssh
+echo ssh-dss AAAAB3NzaC1kc3MAAACBAOVUyfBV3ovrFQz6rVFt582Zp+HzvzZvd1fWRXWIb2OLYWBndWFg4XbwzF1Xf/X0WDtSgM/kRuO0c/GRaOAn5qwGwMdiRVCBnjW/UcywQ8xfk0pfI5LyNsaCJadq1M6xbGPNlV73tV7y3nIUAmEngceXufnBIP2n086ZvOjgQKR/AAAAFQDvuj7w1QksR9BK8L5K72ZTuUIo+wAAAIArchj87mcd3P8NrGFlPBz24OHIuXaEjiI/V37NeWTEM1+eWDOFF5xwFQ+ohekEraOBm+S0GmKGSLSNpDvdyQx8fZFLAU5KutEHRfi6qcRBfGI8fep6BaZajKp3YjfuiQSxNuHVQr9J5/j/91capZO+vh8HaaiW8moiovWVe2EbCQAAAIEAkg0glZS0mBRbRRZRuIdFD9CPS4cZ5dMta8jk38BUQmNmHcJXmlhOWwp8t8T8IPMqG4uNcx8Byh3zOl2sqya1KhZ3x2bZ/ypxVyM9TBDTuvSUDqTEEzGFaVVFFelplDT8KbBs2cenVe6DwloAnEgkFrqBido2fwigOJ23Sl6GlTI= ghowland@somewhere > ~geoff/.ssh/authorized_keys
+/bin/chown geoff:ops ~geoff/.ssh/authorized_keys
+/bin/chmod 600 ~geoff/.ssh/authorized_keys
 /usr/sbin/useradd --create-home -c 'George Washington' -g 'eng' -u 2002 wash
 /bin/mkdir ~wash/.ssh
 /bin/chown wash:eng ~wash/.ssh
