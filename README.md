@@ -324,6 +324,8 @@ If no "uid" is specified, the useradd tool will choose the next available one, o
 
 "shell" and "home" will also be defaulted by useradd.
 
+"groups" is a list of strings, which are group names.  These should already exist on the system, so put "groups" Handler items before the "users" Handler items.
+
 #### groups
 
 The Handler Key for "groups" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
