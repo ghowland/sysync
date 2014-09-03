@@ -252,7 +252,29 @@ if not match: null
 
 If the "template" parameter is true, then the file from "source path" is considered a template file, following Python dictionary formatting "%(key)s".
 
+Template data comes from the Host Group "data" dictionary section, which is either a string or a list of strings.  If it is a list of strings, the string that is chosen is based on the index of the current host in the Host Group's host list, modulus (remainder of division) of the number of strings in the template list.
+
 *Only Python string formatting is current supported: "%()s".  Other formats for floating point values, etc will be forthcoming.*
+
+###### Strict Ordering
+
+By default sysync will place an item of work in the sequence it first encountered the key of the Handler item.
+
+If a Handler item key (files: path, yum: name) is found in the first package, and then updated in a second package, then it will be performed at the position of the first package.  The second package merely updates the data of the Handler item's paramaters.
+
+If you need something to happen both at the first time it is encounter (example: early in the configuration, such as a "common" package), and you need something to happen later in the process as well, so that it actually performs two tasks on the same Handler item key (files: path, yum: name), then you need to use the "ordered: true" parameter.
+
+When "ordered" is set to true, sysync will consider both operations to be separate.
+
+The "if not match: true" parameter can be used with "ordered" to skip toggling between doing the first item of work, and the later "ordered" item of work.  This keeps sysync idempotent, even though it is told to do two different things with the same Handler item key (files: path).
+
+###### "set base directory permissions"
+
+"set base directory permissions" defaults to false, so that you can easily point files to be populate into a directory (like "/etc/") without changing that directory's mode (directory permissions).
+
+If you want to set the base directories permissions as well, then set "set base directory permissions: true", and the "directory mode" parameter will be applied to the base directory.
+
+If it is set to false, and the "path" value is a directory and not a file, then only the sub-directories which are managed under the files will have the "directory mode" applied to them.
 
 #### yum
 
