@@ -232,7 +232,7 @@ group: root
 mode: 644
 directory mode: 755
 
-ignore directories: ['.svn']
+ignore directories: ['.svn', '.git']
 ignore files: []
 
 set base directory permissions: false

@@ -9,8 +9,8 @@ group: root
 mode: 644
 directory mode: 755
 
-ignore directories: ['.svn']
-ignore files: []
+ignore directories: ['.svn', '.git']
+ignore files: ['.gitignore']
 
 set base directory permissions: false
 
