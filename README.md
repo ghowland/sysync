@@ -38,11 +38,12 @@ To run from a config directory:
 
 ### Host Groups
 
-A host can only be in a single host grop
+A host can only be in a single host group.
 
 
 ### Hosts
 
+A host defines a specific machine to configure.
 
 ### Packages
 
@@ -87,6 +88,36 @@ The above Package file would first install bind, then installed "files/etc/resol
 
 This allows for absolute sequencing of how things will be installed in this package.
 
+### The Final Configuration Specification
+
+A host can only be in a single host-group.  A host-group contains a set list of packages, in sequence.  Each package contains a sequence of configuration handlers, and handler items to be applied to the Final Configuration Specification.
+
+The Final Configuration Specification is a roll up of all the sequences of packages, handlers and items.  Later packages or package handler items can change the properties of earlier configuration properties.
+
+Consider this.  A host-group with 2 packages, "first_package" and "second_package".
+
+first_package:
+
+```
+- files:
+  - path: /etc/resolv.conf
+    source path: files/etc/resolv.conf
+```
+
+second_package:
+
+```
+- files:
+  - path: /etc/resolv.conf
+    remove: true
+```
+
+The first_package tells sysync to put the "./config/production/files/etc/resolv.conf" file in the "/etc/resolv.conf" location.  The second_package tells sysync to set the "remove = True" data parameter.
+
+When sysync is dont with processing both of the packages, it will only remove the /etc/resolv.conf as a final command.
+
+Why?  Because we first told it to create it with the file given, and then we told it to remove the file.  The final configuration section for the files "/etc/resolv.conf" ignores putting a file there if it's going to be removed.
+
 
 ### Configuration Handlers
 
@@ -97,6 +128,8 @@ Currently these are the Configuration Handlers: files, groups, services, users, 
 Configuration Handlers can be added easily to the code, and a downloadable plug-in system will be developed in the future to support more architectures and package managers.
 
 #### files
+
+The Handler Key for "files" is the "path" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
 
 Default values:
 
@@ -126,6 +159,8 @@ if not match: null
 
 #### groups
 
+The Handler Key for "groups" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
+
 Default values:
 
 ```
@@ -135,6 +170,8 @@ remove: false
 ```
 
 #### services
+
+The Handler Key for "services" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
 
 Default values:
 
@@ -146,6 +183,8 @@ remove: false
 ```
 
 #### users
+
+The Handler Key for "users" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
 
 Default values:
 
@@ -161,6 +200,8 @@ remove: false
 ```
 
 #### yum
+
+The Handler Key for "yum" is the "name" key.  This key must exist, and all changes associated with this key will overwrite the defaults as each Package Configuration Handler Section Item is processed.
 
 Default values:
 
