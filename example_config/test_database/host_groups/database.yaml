@@ -1,0 +1,14 @@
+name: Databases
+
+hosts:
+  - db-1
+
+data:
+  - type: db
+
+packages:
+  - common
+  - users
+  - groups
+  - mysql
+

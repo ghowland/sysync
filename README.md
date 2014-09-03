@@ -84,7 +84,7 @@ Any number of sections can exist in the same Package file, and a "yum" handler c
   - name: mysql-server
 ```
 
-The above Package file would first install bind, then installed "files/etc/resolve.conf" in the "config/production" current working directory to /etc/resolv.conf, and finally it will install the "mysql-server" yum package.
+The above Package file would first install "bind", then installed "files/etc/resolve.conf" in the "config/production" current working directory to /etc/resolv.conf, and finally it will install the "mysql-server" yum package.
 
 This allows for absolute sequencing of how things will be installed in this package.
 
