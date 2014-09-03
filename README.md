@@ -171,7 +171,7 @@ It is recommended that you start with more general configuration (ex: a "common"
 
 If you require updating a single file twice, for example starting with a common "/etc/resolv.conf" and then later updating to a specific "/etc/resolv.conf", to perhaps switch between general datacenter DNS resolution and specific app-server DNS resolution, you can create a general Package "common" and a final run Package such as "common_last_app" that is the last Package listed.
 
-In this way you can perform general actions at the beginning of the configuration, and then override them with a very specific change later.  See the section below [#strict-ordering][Strict Ordering] for details.
+In this way you can perform general actions at the beginning of the configuration, and then override them with a very specific change later.  See the section below [Strict Ordering](#strict-ordering) for details.
 
 ### The Final Configuration Specification
 
