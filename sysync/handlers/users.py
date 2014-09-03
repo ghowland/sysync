@@ -86,6 +86,10 @@ def Install(section_item, host_data, options):
     if section_item['home'] != None:
       cmd += ' -d "%s"' % section_item['home']
     
+    # Crypted Password
+    if section_item['crypt_password'] != None:
+      cmd += ' -p "%s"' % section_item['crypt_password']
+    
     # Add the username
     cmd += ' %s' % section_item['name']
     

@@ -248,6 +248,7 @@ This will inspect the "database" Host Group, and will print:
 {'__key': 'eng', 'gid': 2002, 'name': 'eng', 'remove': False}
 
 {'__key': 'geoff',
+ 'crypt_password': None,
  'fullname': 'Geoff Howland',
  'groups': ['ops', 'eng'],
  'home': '/home/ghowland',
@@ -258,6 +259,7 @@ This will inspect the "database" Host Group, and will print:
  'uid': 2001}
 
 {'__key': 'wash',
+ 'crypt_password': None,
  'fullname': 'George Washington',
  'groups': ['eng'],
  'home': None,
@@ -396,6 +398,7 @@ groups: []
 ssh key: null
 shell: null
 home: null
+crypt_password: null
 remove: false
 ```
 
@@ -404,6 +407,8 @@ If no "uid" is specified, the useradd tool will choose the next available one, o
 "shell" and "home" will also be defaulted by useradd.
 
 "groups" is a list of strings, which are group names.  These should already exist on the system, so put "groups" Handler items before the "users" Handler items.
+
+As a security point, if you use the "crypt_password" value, while the useradd process is running the crypted password will be visible in the process list.
 
 #### groups
 
