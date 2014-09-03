@@ -41,12 +41,19 @@ To run from a config directory:
 
 ### Host Groups
 
-A host can only be in a single host group.
+A Host Group contains 5 pieces of data:
 
+* It's name/label.
+* It's domain name, that will be appended to all of the machines.
+* Any data associated with the host group for templating into files.
+* All hosts that are to be built with this host group.
+* All packages, in sequeunce, that will be applied to each host in this host group.
 
-### Hosts
+A host can only be in a single host group.  If a host is put into more than 1 host group, sysync will abort with an error.  This saves more headaches and problems than any clever uses that putting a host into more than one host group can ever yield, so do not subvert it.  Use a different configuration manager if you wish to apply conflict, non-deterministic, non-idempotent changes to your hosts.
 
-A host defines a specific machine to configure.
+Packages will be applied in sequence to each host.
+
+sysync is run locally, so the host name should already be configured before sysync is run.  sysync is not a system image manager, so it expects that a system already has a bootable OS, and an IP address, and a working resolver, and a unique host name.  Once a host has these things, sysync will take care of the rest.
 
 ### Packages
 
