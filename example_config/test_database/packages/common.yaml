@@ -1,0 +1,4 @@
+- files:
+  - path: /etc/resolv.conf
+    source path: files/common/etc/resolv.conf
+
