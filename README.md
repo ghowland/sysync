@@ -19,11 +19,14 @@ Command Line options:
   -h, -?, --help          This usage information
   -C, --commit            Commit changes.  No changes will be made, unless set.
   -b, --bootstrap         Boot Strap this host (assume no local configuration)
+  
       --hostgroups[=path] Path to host groups (directory)
-      --deploy[=path]     Path to deployment files (directory)
-      --packages[=path]   Path to package files (directory)
       --handlers[=path]   Path to handler default yaml data (directory)
+      --packages[=path]   Path to package files (directory)
+      
       --buildas[=group]   Manually specify Host Group, cannot be in one already
+      
+      --deploy[=path]     Path to deployment files (directory)
 
   -v, --verbose           Verbose output
   -o, --output            Output file

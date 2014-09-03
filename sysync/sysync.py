@@ -86,11 +86,14 @@ def Usage(error=None):
   print '  -h, -?, --help          This usage information'
   print '  -C, --commit            Commit changes.  No changes will be made, unless set.'
   print '  -b, --bootstrap         Boot Strap this host (assume no local configuration)'
+  print
   print '      --hostgroups[=path] Path to host groups (directory)'
-  print '      --deploy[=path]     Path to deployment files (directory)'
-  print '      --packages[=path]   Path to package files (directory)'
   print '      --handlers[=path]   Path to handler default yaml data (directory)'
+  print '      --packages[=path]   Path to package files (directory)'
+  print
   print '      --buildas[=group]   Manually specify Host Group, cannot be in one already'
+  print
+  print '      --deploy[=path]     Path to deployment files (directory)'
   print
   print '  -v, --verbose           Verbose output'
   print '  -o, --output            Output file'
