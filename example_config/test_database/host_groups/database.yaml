@@ -7,7 +7,7 @@ hosts:
 
 data:
   host_type: db
-  cache_server: ["memcache-1", "memcache-2", "memcache-3"]
+  backup_server: ["backup-1", "backup-2", "backup-3"]
 
 packages:
   - common
