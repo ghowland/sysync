@@ -177,7 +177,7 @@ In this way you can perform general actions at the beginning of the configuratio
 
 A host can only be in a single host-group.  A host-group contains a set list of packages, in sequence.  Each package contains a sequence of configuration handlers, and handler items to be applied to the Final Configuration Specification.
 
-The Final Configuration Specification is a roll up of all the sequence of package handler items.  Later packages or package handler items can change the properties of earlier configuration properties, resulting in a final updated configuration.
+The Final Configuration Specification is a roll up of all the sequence of package handler items.  Later package handler items can change the properties of earlier package handler item configuration properties, resulting in a final updated configuration.
 
 It is this rolling up of all sequential changes to the specification that gives sysync the propery of idempotency.  It compares the state of the host to the ideal state of the configuration, and only makes the changes necessary to correct the inconsistencies, without doing extraneous work such as putting a file there and then removing it later, even if the Handler items that describe the configuration appear in that order.
 
