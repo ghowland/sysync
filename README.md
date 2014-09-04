@@ -214,7 +214,7 @@ The Final Configuration Specification data will look like this:
     remove: true
 ```
 
-This will remove the file.  "source path" is ignored, because removal takes precidence.
+This will remove the file.  "source path" is ignored, because removal takes precedence.
 
 ##### Inspecting a Host Group's Final Configuration Specification
 
