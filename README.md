@@ -424,3 +424,94 @@ remove: false
 
 If no "gid" is specified, the groupadd tool will choose the next available one, on each host.  It is recommended to set these yourself, but not required.
 
+
+### Example Configuration
+
+#### Example Configuration: test_database
+
+In the "./example_config/test_database" directory there are directories for "files", "host_groups" and "packages" that make a single Host Group (database) and a couple of packages: "common", "groups", "users", "mysql"
+
+Looking at the Host Group "database":
+
+```
+name: Databases
+
+domain: prod.somewhere.com
+
+hosts:
+  - db-1
+
+data:
+  host_type: db
+  backup_server: ["backup-1", "backup-2", "backup-3"]
+
+packages:
+  - common
+  - groups
+  - users
+  - mysql
+```
+
+We have a few pieces of information.  There is a single host in this Host Group (db-1), it has a made up domain "somewhere.com", which will mean the fully qualified host name for db-1 should be "db-1.prod.somewhere.com".
+
+There are 2 pieces of template data "host_type" and "backup_server".  "backup_server" is a list, so in the "server index number % list count" algorithm we get "0 % 3", which means index 0 for the "backup_server" string, so the template value will be "backup-1".
+
+There are the packages mentioned above.
+
+###### Example Configuration: test_database: Package: common
+
+```
+- files:
+  - path: /etc/resolv.conf
+    source path: common/etc/resolv.conf
+```
+
+In the common package we are just going to install the /etc/resolv.conf file.  Not a lot of mystery here hopefully.
+
+###### Example Configuration: test_database: Package: groups
+
+```
+- groups:
+  - name: ops
+    gid: 2001
+
+  - name: eng
+    gid: 2002
+```
+
+In the groups package we are going to create 2 groups, ops and eng, with their Group IDs specified.
+
+###### Example Configuration: test_database: Package: users
+
+```
+- users:
+  - name: geoff
+    fullname: Geoff Howland
+    uid: 2001
+    groups: ['ops', 'eng']
+    ssh key: "ssh-dss AAAAB3NzaC1kc3MAAACBAOVUyfBV3ovrFQz6rVFt582Zp+HzvzZvd1fWRXWIb2OLYWBndWFg4XbwzF1Xf/X0WDtSgM/kRuO0c/GRaOAn5qwGwMdiRVCBnjW/UcywQ8xfk0pfI5LyNsaCJadq1M6xbGPNlV73tV7y3nIUAmEngceXufnBIP2n086ZvOjgQKR/AAAAFQDvuj7w1QksR9BK8L5K72ZTuUIo+wAAAIArchj87mcd3P8NrGFlPBz24OHIuXaEjiI/V37NeWTEM1+eWDOFF5xwFQ+ohekEraOBm+S0GmKGSLSNpDvdyQx8fZFLAU5KutEHRfi6qcRBfGI8fep6BaZajKp3YjfuiQSxNuHVQr9J5/j/91capZO+vh8HaaiW8moiovWVe2EbCQAAAIEAkg0glZS0mBRbRRZRuIdFD9CPS4cZ5dMta8jk38BUQmNmHcJXmlhOWwp8t8T8IPMqG4uNcx8Byh3zOl2sqya1KhZ3x2bZ/ypxVyM9TBDTuvSUDqTEEzGFaVVFFelplDT8KbBs2cenVe6DwloAnEgkFrqBido2fwigOJ23Sl6GlTI= ghowland@somewhere"
+    shell: /bin/bash
+    home: /home/ghowland
+
+  - name: wash
+    fullname: George Washington
+    uid: 2002
+    groups: ['eng']
+    ssh key: "ssh-dss AAAAB3NzaC1kc3MAAACBAPTG0VLaD5Wstpl4EZ8NN0R2vmeMpGkJy0Epc7X2n9NZMLbMscy3lcuYqdwJ8ch8Nf/fk2Zm+v9hyHBL/XxqquTCGPJqLhi1Pf3+N0zzHwMAaiLa89o1dsJG6mjEfym4Y6dECgifqVMSJSYfagi2HfgFB75GYYjR4uKSHMqEMH2LAAAAFQCix7HT0Fb/qvgC8B3axxiTYxUk5wAAAIApXOsD3g9L4gYVFafHZrH9JaoH+9ATtXSXxPTPEcISF2eCwSbZL57+GLrT6SpPes8TmwEKD/tsucZl7m6vwG5V86ILUzQwsjh0BP8CCwhkqBNZhLfNtjJn0/bfYESUejDgoBSK2k/EEzDIqOfILEp2wLqrHPBq93dC4vP0OXn9kAAAAIBpooBr/Q4Je2D8EqYsD/hlNzqNawhjNTNTS2+AWLftseN+nszugGZ0utRA8cDEGMR/1n2p8MjAu/KThXpJzWfe8g54NYasYc3GxdoNqrI4trYglSQTP4aKEBL0GYmb71NSiUPf0J6ahRswpo1yQx8XHt+aaWItRupgyFnYN1aUVg== wash@somewhere"
+```
+
+In the users package we are going to install 2 users, "geoff" and "wash", with specified User IDs, groups (list of strings) and SSH Public Keys.
+
+###### Example Configuration: test_database: Package: mysql
+
+```
+- yum:
+  - name: mysql-server
+
+- services:
+  - name: mysqld
+    run: true
+```
+
+In the mysql package we still the "mysql-server" package from yum repos, and that activate the chkconfig mysqld.
+
