@@ -285,7 +285,7 @@ This shows all the Handler items in the sequence they will be processed during t
 
 This is all the parameters available, found in the "./sysync/handlers/defaults/" directory, for the given Configuration Handler, with any updated values found in the packages.
 
-Note the "__key" parameter, which will map to "path" in a files Configuration, or "name" in a yum Configuration.  This is the unique identifier that allows sysync to act idempotently after processing all section items from all packages.  "__key" will only be seen more than once using the files "ordered" parameter, otherwise there will only be 1 instance of a given Configuration Handler "__key" in the inspect output.
+Note the "__key" parameter, which will map to "path" in a files configuration, or "name" in a yum configuration.  This is the unique identifier that allows sysync to act idempotently after processing all section items from all packages.  "__key" will only be seen more than once using the files "ordered" parameter, otherwise there will only be 1 instance of a given Configuration Handler "__key" in the inspect output.
 
 ### Configuration Handlers
 
