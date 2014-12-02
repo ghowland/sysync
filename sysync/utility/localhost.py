@@ -15,8 +15,9 @@ def GetHostname():
   (status, output) = Run('/bin/hostname -f')
   
   # On linux/GNU, hostname will fail if it cant provide a FQDN, so run it again without that
-  if status != 0 and 'hostname: Unknown host' in output:
-    (status, output) = Run('/bin/hostname')
+  if status != 0:
+    if 'hostname: Unknown host' in output:
+      (status, output) = Run('/bin/hostname')
   
   return output
 

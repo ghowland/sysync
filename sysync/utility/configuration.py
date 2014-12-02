@@ -50,6 +50,9 @@ def GetHostInHostGroups(hostname, options):
   # Get our host groups
   host_groups = GetHostGroups(options)
   
+  # Verbose failure message
+  verbose_failure = ''
+  
   # Look through the host group data for this hostname (host+domain)
   for (hostgroup, data) in host_groups.items():
     # Get the domain, if it is specified
@@ -64,6 +67,10 @@ def GetHostInHostGroups(hostname, options):
       else:
         this_fqdn = host
       
+      # If we want verbosity, explain this in great detail
+      if options['verbose']:
+        verbose_failure += 'Testing host:  This FQDN: %s   Host Group:  %s    Test Against Host: %s' % host
+      
       # If we found a match for this hostname in this host group, then 
       #   add it to our list, and stop checking hosts in this group
       if this_fqdn == hostname:
@@ -73,6 +80,11 @@ def GetHostInHostGroups(hostname, options):
       else:
         #Log('No match: %s !-> %s' % (hostname, hostgroup))
         pass
+  
+  
+  # Log verbose failure, if we have them
+  if not host_group_list and verbose_failure:
+    Log('Failed to find any host groups for this host.  Here was the process:\n%s' % verbose_failure)
   
   return host_group_list
 
