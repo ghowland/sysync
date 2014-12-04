@@ -16,14 +16,22 @@ def InstallSystem(options, args):
   """Install the local host from the sysync deployment configuration files."""
   installed = {}
   
-  Log('Options: %s' % options)
-  
   # Determine what this host is
   hostname = localhost.GetHostname(options)
   
   if hostname == None:
     Error('Host name not found.')
   
+  
+  # Log our available host groups, if verbose
+  if options['verbose']:
+    host_groups = configuration.GetHostGroups(options)
+    host_group_keys = list(host_groups.keys())
+    host_group_keys.sort()
+    Log('Available Host Groups: %s' % ', '.join(host_group_keys))
+
+  
+
   # Determine what host groups this host is in
   host_groups = configuration.GetHostInHostGroups(hostname, options)
   
@@ -77,12 +85,6 @@ def InstallPackagesLocally(hostname, host_group, options):
   host_groups = configuration.GetHostGroups(options)
   host_group_data = configuration.GetHostGroups(options)[host_group]
   host_data['host_group'] = host_group_data
-
-  
-  if options['verbose']:
-    host_group_keys = list(host_groups.keys())
-    host_group_keys.sort()
-    Log('Available Host Groups: ' % ', '.join(host_group_keys))
 
   
   # If bootstrap=True, then install package
