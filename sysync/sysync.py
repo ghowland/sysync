@@ -15,6 +15,7 @@ __author__ = 'Geoff Howland <geoff@gmail.com>'
 import sys
 import os
 import getopt
+import pprint
 
 # sysync utility module
 import utility
@@ -47,6 +48,9 @@ def ProcessCommand(command, options, args):
     args: list of strings, args for the command
   """
   #print 'Process command: %s: %s: %s' % (command, options, args)
+  
+  if options['verbose']:
+    utility.log.Log('Command Options:\n%s' % pprint.pformat(options, indent=8))
   
   # Install the local host
   if command == 'install':

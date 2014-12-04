@@ -16,8 +16,10 @@ def InstallSystem(options, args):
   """Install the local host from the sysync deployment configuration files."""
   installed = {}
   
+  Log('Options: %s' % options)
+  
   # Determine what this host is
-  hostname = localhost.GetHostname()
+  hostname = localhost.GetHostname(options)
   
   if hostname == None:
     Error('Host name not found.')
@@ -46,6 +48,7 @@ def InstallSystem(options, args):
       Error('Host "%s" is already in host group "%s", cannot be manually build as "%s"' % \
           (hostname, host_groups[0], options['build_as']), options)
 
+
   Log('Installing %s with host group: %s' % (hostname, host_group))
   installed['host_group'] = host_group
   
@@ -71,8 +74,16 @@ def InstallPackagesLocally(hostname, host_group, options):
   host_data = configuration.GetHostData(hostname, host_group, options)
   
   # Get host group data
+  host_groups = configuration.GetHostGroups(options)
   host_group_data = configuration.GetHostGroups(options)[host_group]
   host_data['host_group'] = host_group_data
+
+  
+  if options['verbose']:
+    host_group_keys = list(host_groups.keys())
+    host_group_keys.sort()
+    Log('Available Host Groups: ' % ', '.join(host_group_keys))
+
   
   # If bootstrap=True, then install package
   if options.get('bootstrap', False):

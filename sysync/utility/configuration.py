@@ -60,6 +60,9 @@ def GetHostInHostGroups(hostname, options):
     if not domain:
       Log('No domain specified in host group file: %s.yaml' % hostgroup)
     
+    if options['verbose']:
+      verbose_failure += '   Testing host group: %s\n' % hostgroup
+    
     # Try to find a match for this hostgroup
     for host in data.get('hosts', []):
       if domain:
@@ -69,7 +72,7 @@ def GetHostInHostGroups(hostname, options):
       
       # If we want verbosity, explain this in great detail
       if options['verbose']:
-        verbose_failure += 'Testing host:  This FQDN: %s   Host Group:  %s    Test Against Host: %s' % host
+        verbose_failure += '   Machine Hostname: %s   Test FQDN: %s   Test Host Group:  %s\n' % (hostname, this_fqdn, hostgroup)
       
       # If we found a match for this hostname in this host group, then 
       #   add it to our list, and stop checking hosts in this group
@@ -85,6 +88,10 @@ def GetHostInHostGroups(hostname, options):
   # Log verbose failure, if we have them
   if not host_group_list and verbose_failure:
     Log('Failed to find any host groups for this host.  Here was the process:\n%s' % verbose_failure)
+  
+  # Else, log them if verbose
+  elif options['verbose']:
+    Log('Host Group List: %s' % host_group_list)
   
   return host_group_list
 
