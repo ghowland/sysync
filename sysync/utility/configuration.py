@@ -50,6 +50,10 @@ def GetHostInHostGroups(hostname, options):
   # Get our host groups
   host_groups = GetHostGroups(options)
   
+  # If there arent any host groups, we cant go on
+  if not host_groups:
+    Error('No host groups were found.  Please add some to /etc/sysync/host_groups/ or use the --hostgroups=directory to specify the desired location for Host Group YAML files.', options)
+  
   # Verbose failure message
   verbose_failure = ''
   
